@@ -1,0 +1,19 @@
+version: '3.0'
+
+volumes:
+  sql-data:
+    name: sql-data
+    driver: local
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server
+    environment:
+      MSSQL_SA_USER: ${SQL_USER}
+      MSSQL_SA_PASSWORD: ${SQL_PASSWORD}      
+      ACCEPT_EULA: Y
+    ports:
+      - ${SQL_PORT}:1433
+    volumes:
+      - sql-data:/var/opt/mssql
